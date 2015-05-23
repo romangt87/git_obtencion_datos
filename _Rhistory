@@ -1,0 +1,461 @@
+install.packages("AppliedPredictiveModeling")
+install.packages("caret")
+library(AppliedPredictiveModeling)
+library(caret)
+data(AlzheimerDisease)
+library(AppliedPredictiveModeling)
+library(caret)
+data(AlzheimerDisease)
+adData = data.frame(diagnosis,predictors)
+testIndex = createDataPartition(diagnosis, p = 0.50,list=FALSE)
+training = adData[-testIndex,]
+testing = adData[testIndex,]
+diagnosis
+dim(diagnosis)
+dim(diagnosis.predictors)
+length(diagnosis)
+dim(training)
+dim(testing)
+head(diagnosis)
+head(training)
+head(testing)
+head(diagnosis)
+class(diagnosis)
+diagnosis[1]
+diagnosis
+head(training)
+library(AppliedPredictiveModeling)
+data(concrete)
+library(caret)
+set.seed(975)
+inTrain = createDataPartition(mixtures$CompressiveStrength, p = 3/4)[[1]]
+training = mixtures[ inTrain,]
+testing = mixtures[-inTrain,]
+head(mixtures)
+install.packages("Hmisc")
+head(training)
+library(Hmisc)
+library(Hmisc)
+featurePlot(x=training[, c("Cement", "BlastFurnaceSlag", "FlyAsh", "Age")],
+y = training$CompressiveStrength,
+plot = "pairs")
+head(training)
+qplot(Age, CompressiveStrength, colour=Cement, data=training)
+qplot(FlyAsh, CompressiveStrength, colour=Cement, data=training)
+qplot(FlyAsh, CompressiveStrength, colour=Age, data=training)
+qplot(Age, CompressiveStrength, colour=FlyAsh, data=training)
+cut = cut2(training$CompressiveStrength, g=3) #g decide cuantos grupos partir el dataset
+cutWage = cut2(training$CompressiveStrength, g=3) #g decide cuantos grupos partir el dataset
+table(cutWage)
+cutWage = cut2(training$CompressiveStrength, g=4) #g decide cuantos grupos partir el dataset
+table(cutWage)
+cutWage = cut2(training$CompressiveStrength, g=3) #g decide cuantos grupos partir el dataset
+table(cutWage)
+p1 = qplot(cutWage, age, data=training, fill=cutWage, geom=c("boxplot"))
+p1
+p1 = qplot(cutWage, Age, data=training, fill=cutWage, geom=c("boxplot"))
+p1
+p2 = qplot(cutWage, Age, data=training, fill=cutWage, geom=c("boxplot", "jitter"))
+p2
+head(training)
+p1 = qplot(cutWage, FlyAsh, data=training, fill=cutWage, geom=c("boxplot"))
+p1
+p2 = qplot(cutWage, FlyAsh, data=training, fill=cutWage, geom=c("boxplot", "jitter"))
+p2
+p1 = qplot(cutWage, Age, data=training, fill=cutWage, geom=c("boxplot"))
+p1
+p2 = qplot(cutWage, Age, data=training, fill=cutWage, geom=c("boxplot", "jitter"))
+p2
+#pregunta 3
+library(AppliedPredictiveModeling)
+data(concrete)
+library(caret)
+set.seed(975)
+inTrain = createDataPartition(mixtures$CompressiveStrength, p = 3/4)[[1]]
+training = mixtures[ inTrain,]
+testing = mixtures[-inTrain,]
+head(training)
+hist(training$Superplasticizer, main="", xlab="Superplasticizer run length")
+mean(training$Superplasticizer)
+sd(training$Superplasticizer)
+training$Superplasticizer
+logsp = log(training$Superplasticizer +1)
+hist(logsp, main="", xlab="Superplasticizer run length")
+hist(training$Superplasticizer, main="", xlab="Superplasticizer run length")
+hist(logsp, main="", xlab="Superplasticizer run length")
+library(caret)
+library(AppliedPredictiveModeling)
+set.seed(3433)
+data(AlzheimerDisease)
+adData = data.frame(diagnosis,predictors)
+inTrain = createDataPartition(adData$diagnosis, p = 3/4)[[1]]
+training = adData[ inTrain,]
+testing = adData[-inTrain,]
+head(training)
+names(training)
+training2 = training[, c(56:69)]
+head(training2)
+dim(training)
+names(training2)
+preObj = preProcess(training2, method=c("center", "scale"))
+preObj
+head(training)
+training2 = training[, c(1, 56:69)]
+names(training2)
+training2$diagnosis
+preObj = preProcess(training2, method=c("center", "scale"))
+head(training2)
+testing$diagnosis
+modelFit1 = train(training2$diagnosis ~., method="glm", preprocess="pca", data=training2)
+head(training)
+dim(training)
+names(training)
+dim(training2)
+names(training2)
+training2$diagnosis
+modelFit1 = train(training2$diagnosis ~., method="glm", preProcess="pca", data=training2)
+confusionMatrix(testing$diagnosis, predict(modelFit1, testing))
+modelFit2 = train(training2$diagnosis ~., method="glm", data=training2)
+confusionMatrix(testing$diagnosis, predict(modelFit2, testing))
+library(caret)
+library(AppliedPredictiveModeling)
+set.seed(3433)
+data(AlzheimerDisease)
+adData = data.frame(diagnosis,predictors)
+inTrain = createDataPartition(adData$diagnosis, p = 3/4)[[1]]
+training = adData[ inTrain,]
+testing = adData[-inTrain,]
+training$names
+names(training)
+training2 = training[, c(1, 58:69)]
+preObj = preProcess(training2, method=c("center", "scale"))
+names(training2)
+dim(training2)
+modelFit1 = train(training2$diagnosis ~., method="glm", preProcess="pca", data=training2)
+confusionMatrix(testing$diagnosis, predict(modelFit1, testing))
+modelFit2 = train(training2$diagnosis ~., method="glm", data=training2)
+confusionMatrix(testing$diagnosis, predict(modelFit2, testing))
+confusionMatrix(testing$diagnosis, predict(modelFit1, testing))
+training2 = training[, c(1, 58:69)]
+preObj = preProcess(training2, method="pca", pcaComp=5)
+training3 = training[, c(58:69)]
+preObj = preProcess(training2, method="pca", pcaComp=5)
+preObj = preProcess(training3, method="pca", pcaComp=5)
+names(training3)
+training2 = training[, c(1, 58:69)]
+training3 = training[, c(58:69)]
+preProc = preProcess(training3, method="pca", pcaComp=5)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testing3 = testing[, c(58:69)]
+training2 = training[, c(1, 58:69)]
+testing2 = testing[, c(1, 58:69)]
+training3 = training[, c(58:69)]
+testing3 = testing[, c(58:69)]
+preProc = preProcess(training3, method="pca", pcaComp=5)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testPC = predict(preProc, testing3)
+testPC
+confusionMatrix(testing2$diagnosis, predict(modelFit, testPC))
+preProc = preProcess(training3, method="pca", pcaComp=7)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testPC = predict(preProc, testing3)
+confusionMatrix(testing2$diagnosis, predict(modelFit, testPC))
+preProc = preProcess(training3, method="pca", pcaComp=11)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testPC = predict(preProc, testing3)
+confusionMatrix(testing2$diagnosis, predict(modelFit, testPC))
+preProc = preProcess(training3, method="pca", pcaComp=5)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testPC = predict(preProc, testing3)
+confusionMatrix(testing2$diagnosis, predict(modelFit, testPC))
+preProc = preProcess(training3, method="pca", pcaComp=11)
+trainPC = predict(preProc, training3)
+modelFit = train(training2$diagnosis ~., method="glm", data=trainPC)
+testPC = predict(preProc, testing3)
+confusionMatrix(testing2$diagnosis, predict(modelFit, testPC))
+library(AppliedPredictiveModeling)
+data(concrete)
+library(caret)
+set.seed(975)
+inTrain = createDataPartition(mixtures$CompressiveStrength, p = 3/4)[[1]]
+training = mixtures[ inTrain,]
+testing = mixtures[-inTrain,]
+#la variable capitalAve esta muy skewed, vamos a intentar estandarizarla
+hist(training$Superplasticizer, main="", xlab="Superplasticizer run length")
+mean(training$Superplasticizer)
+sd(training$Superplasticizer)
+logsp = log(training$Superplasticizer +1)
+hist(logsp, main="", xlab="Superplasticizer run length")
+logsp2 = log(training$Superplasticizer)
+logsp2
+hist(logsp2, main="", xlab="Superplasticizer run length")
+#entrada y salida de datos:
+library(RODBC)
+#machine learning:
+library(caret)
+library(kernlab)
+data(spam)
+inTrain = createDataPartition(y = spam$type, p=0.75, list=FALSE)
+training = spam[inTrain,]
+testing = spam[-inTrain,] #coge todos exceptuando los que esten en el vector inTrain
+dim(training)
+head(training)
+set.seed(32343)
+modelFit = train(type ~., data=training, method="glm") # intento predecir la columna type
+# ~. le permite usar todo tipo de variables del data.frame
+modelFit
+predictions = predict(modelFit, newdata=testing)
+confusionMatrix(predictions, testing$type)
+modelFit$finalModel
+#question 1
+library(AppliedPredictiveModeling)
+library(caret)
+data(segmentationOriginal)
+head(segmentationOriginal)
+training = segmentationOriginal[segmentationOriginal$Case="Train",]
+training = segmentationOriginal[segmentationOriginal$Case="Train"]
+segmentationOriginal$Case
+training = segmentationOriginal[segmentationOriginal$Case=="Train"]
+training = segmentationOriginal[segmentationOriginal$Case=="Train",]
+dim(setmentationOriginal)
+segmentationOriginal
+dim(segmentationOriginal)
+dim(training)
+testing = segmentationOriginal[segmentationOriginal$Case=="Test",]
+dim(testing)
+dim(testing)+dim(training)
+data(iris)
+library(ggplot2)
+names(iris)
+table(iris$species)
+table(iris$Species)
+inTrain = createDataPartition(y=iris$Species, p = 0.7, list=FALSE)
+training = iris[inTrain,]
+testing = iris[-inTrain,]
+dim(training)
+dim(testing)
+data(iris)
+library(ggplot2)
+names(iris)
+qplot(Petal.Width, Speal.Width, colour=Species, data=training)
+head(training)
+qplot(Petal.Width, Sepal.Width, colour=Species, data=training)
+modFit = train(Species ~ ., method="rpart", data=training)
+print(modFit$finalModel)
+plot(modFit$finalModel, uniform=TRUE, main="Tree")
+text(modFit$finalModel, use.n=TRUE, all=TRUE, cex=.8)
+library(rattle)
+fancyRpartPlot(modFit$finalModel)
+install.packages("rattle")
+library(rattle)
+fancyRpartPlot(modFit$finalModel)
+predict(modFit, newdata=testing)
+library(AppliedPredictiveModeling)
+library(caret)
+data(segmentationOriginal)
+training = segmentationOriginal[segmentationOriginal$Case=="Train",]
+testing = segmentationOriginal[segmentationOriginal$Case=="Test",]
+set.seed(125)
+set.seed(125)
+names(training)
+qplot(TotalIntench2, FiberWidthCh1, colour=PerimStatusCh1, data=training)
+qplot(TotalIntenCh2, FiberWidthCh1, colour=PerimStatusCh1, data=training)
+head(training)
+modFit = train(Class ~ ., method="rpart", data=training)
+print(modFit$finalModel)
+plot(modFit$finalModel, uniform=TRUE, main="Tree")
+text(modFit$finalModel, use.n=TRUE, all=TRUE, cex=.8)
+install.packages("ElemStatLearn")
+library(ElemStatLearn)
+data(ozone, package="ElemStatLearn")
+ozone = ozone[order(ozone$ozone), ]
+head(ozone)
+dim(ozone)
+predictors = data.frame(ozone=ozone$ozone)
+temperature = ozone$temperature
+predictors
+head(predictors)
+head(temperature)
+treebag = bag(predictors, temperature, B=10,
+bagControl=bagControl(fit=ctreeBag$fit,
+predict=ctreeBag$pred,
+aggregate=ctreeBag$aggregate))
+treebag = bag(predictors, temperature, B=10,
+bagControl=bagControl(fit=ctreeBag$fit,
+predict=ctreeBag$pred,
+aggregate=ctreeBag$aggregate))
+ctreeBag$fit
+ctreeBag$aggregate #calcula una especie de media de todas las predicciones
+data(iris)
+library(ggplot2)
+names(iris)
+inTrain = createDataPartition(y=iris$Species, p = 0.7, list=FALSE)
+training = iris[inTrain,]
+testing = iris[-inTrain,]
+modFit = train(Species ~ ., method="rf", data=training, prox=TRUE)
+modFit
+getTree(modFit$finalModel, k=2)
+pred = predict(modFit, testing)
+pred
+testing$predRight = pred==testing$Species
+head(testing)
+testing$predRight
+table(pred, testing$Species)
+library(pgmm)
+install.packages("pgmm")
+library(pgmm)
+data(olive)
+olive = olive[, -1]
+head(olive)
+olive$Area
+head(olive)
+dim(olive)
+library("tree", lib.loc="/Library/Frameworks/R.framework/Versions/3.1/Resources/library")
+newdata2 = as.data.frame(t(colMeans(olive)))
+dim(newdata2)
+newdata2
+training = olive
+modFit = train(Area ~ ., method="rpart", data=training)
+print(modFit$finalModel)
+head(olive)
+modFit = train(Area ~ ., method="rpart", data=training)
+newdata2 = as.data.frame(t(colMeans(olive)))
+testing = as.data.frame(t(colMeans(olive)))
+pred = predict(modFit, newdata=testing)
+pred
+colMeans(olive)
+t(colMeans(olive))
+testing
+pred = predict(modFit, newdata=testing)
+predict(modFit, newdata=testing)
+print(modFit$finalModel)
+plot(modFit$finalModel, uniform=TRUE, main="Tree")
+text(modFit$finalModel, use.n=TRUE, all=TRUE, cex=.8)
+testing
+install.packages("ElemStatLearn")
+library(ElemStatLearn)
+data(SAheart)
+set.seed(8484)
+train = sample(1:dim(SAheart)[1],size=dim(SAheart)[1]/2,replace=F)
+trainSA = SAheart[train,]
+testSA = SAheart[-train,]
+dim(train)
+train
+trainSA
+head(train)
+head(trainSA)
+head(testSA)
+dim(trainSA)
+dim(testSA)
+dim(SAheart)
+462/2
+data(iris)
+library(ggplot2)
+names(iris)
+modlda = train(Species ~ ., method="lda", data=training)
+modnb = train(Species ~ ., method="nb", data=training)
+predlda = predict(modlda, testing)
+prednb = predict(modnb, testing)
+modlda = train(Species ~ ., method="lda", data=training)
+library(caret)
+data(iris)
+library(ggplot2)
+names(iris)
+inTrain = createDataPartition(y=iris$Species, p = 0.7, list=FALSE)
+training = iris[inTrain,]
+testing = iris[-inTrain,]
+modlda = train(Species ~ ., method="lda", data=training)
+modnb = train(Species ~ ., method="nb", data=training)
+predlda = predict(modlda, testing)
+prednb = predict(modnb, testing)
+modlda
+modnb
+predlda
+table(predlda, prednb)
+head(testing)
+predlda
+confusionMatrix(predlda, testing$Species)
+confusionMatrix(prednb, testing$Species)
+table(predlda, prednb)
+table(predlda, prednb)
+modlda = train(Species ~ ., method="lda", data=training)
+modnb = train(Species ~ ., method="nb", data=training)
+predlda = predict(modlda, testing)
+prednb = predict(modnb, testing)
+table(predlda, prednb)
+library(ElemStatLearn)
+data(SAheart)
+set.seed(8484)
+train = sample(1:dim(SAheart)[1],size=dim(SAheart)[1]/2,replace=F)
+trainSA = SAheart[train,]
+testSA = SAheart[-train,]
+head(trainSA)
+set.seed(13234)
+training = trainSA[, c(2:3, 6:10)]
+head(training)
+training = trainSA[, c(2:3, 6:10)]
+set.seed(13234)
+modFit = train(chd ~ ., method="glm", data=training, family="binomial")
+testing = testSA[, c(2:3, 6:10)]
+pred = predict(modFit, newdata=testing)
+pred
+head(pred)
+head(testSA)
+missClass = function(values,prediction){
+sum(((prediction > 0.5)*1) != values)/length(values)
+}
+missClass(testing, pred)
+pred
+dim(pred)
+head(pred)
+lenth(pred)
+length(pred)
+dim(testing)
+head(testing)
+missClass(testing$chd, pred)
+missClass(training$chd, pred)
+missClass(testing$chd, predT)
+predT = predict(modFit, newdata=testing)
+missClass(testing$chd, predT)
+predTest = predict(modFit, newdata=testing)
+predTraining = predict(modFit, newdata=training)
+missClass(training$chd, predTraining)
+library(ElemStatLearn)
+data(vowel.train)
+data(vowel.test)
+library(ElemStatLearn)
+data(vowel.train)
+data(vowel.test)
+head(vowel.train)
+set.seed(33833)
+training = vowel.train
+testing = vowel.test
+head(training)
+head(testing)
+modFit = train(y ~ ., method="rf", data=training, prox=TRUE)
+modFit
+dim(training)
+varImp(modFit)
+varImp(modFit, useModel = TRUE, nonpara = TRUE, scale = TRUE)
+modFit
+modFit2 = train(y ~ ., method="rf", data=training)
+varImp(modFit)
+modFit2
+varImp(modFit2)
+varImp(modFit2, useModel = TRUE, scale = TRUE)
+modFit$finalModel
+getTree(modFit$finalModel, k=1)
+getTree(modFit$finalModel, k=2)
+getTree(modFit$finalModel, k=3)
+getTree(modFit$finalModel, k=4)
+getTree(modFit$finalModel, k=5)
+getTree(modFit$finalModel, k=6)
+getTree(modFit$finalModel, k=7)
+getTree(modFit$finalModel, k=8)
+getTree(modFit$finalModel, k=9)
+getTree(modFit$finalModel, k=10)
