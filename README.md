@@ -1,6 +1,3 @@
-# Please open the run_analysis.html file to see all the analisys and comments with all the variable names and types, including the R script. Thank you very much.
-
-
 
 library(data.table)
 library(dplyr)
