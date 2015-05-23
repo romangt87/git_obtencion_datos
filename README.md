@@ -1,5 +1,4 @@
-# Please open the .html file to see all the analisys and comments with all the variable names and types, including the R 
-# script. Thank you very much.
+# Please open the run_analysis.html file to see all the analisys and comments with all the variable names and types, including the R script. Thank you very much.
 
 
 
@@ -40,8 +39,7 @@ activity = rbind(train_activity, test_activity)
 colnames(activity) = "ACTIVITY_CODE"
 variables = rbind(train_variables, test_variables)
 
-##Now we can use the variables_name to put these names in the variables data.frame
-##Firs doing this we check the same length of the respective dataframes
+##Now we can use the variables_name to put these names in the variables data.frame. Before doing this we check the same length of the respective dataframes
 ncol(variables) == nrow(variables_names)
 names(variables) = t(variables_names[2])
 
@@ -82,15 +80,13 @@ names(extract_data2)
 
 
 
-# 5 - From the data set in step 4, creates a second, independent tidy data set with the average of 
-#     each variable for each activity and each subject.
+# 5 - From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 
 ##For doing this we need a new data set without the ACTIVITY_CODE variable:
 extract_data3 = extract_data2[, -1]
 
-##For doing this, we have to change the variables class. We need the ACTIVITY_NAME and PERSON 
-##as factor variables and the data.set as a data.table
+##For doing this, we have to change the variables class. We need the ACTIVITY_NAME and PERSON as factor variables and the data.set as a data.table
 class(extract_data3$ACTIVITY_NAME)
 extract_data3$PERSON = as.factor(extract_data3$PERSON)
 extract_data3 = data.table(extract_data3)
